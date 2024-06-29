@@ -25,9 +25,6 @@ add_executable(Tutorial tutorial.cxx)
 
 target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})
 
-# TODO 4: Add MathFunctions to Tutorial's target_include_directories()
-# Hint: ${PROJECT_SOURCE_DIR} is a path to the project source. AKA This folder!
-
 # add the binary tree to the search path for include files
 # so that we will find TutorialConfig.h
 target_include_directories(Tutorial PUBLIC
