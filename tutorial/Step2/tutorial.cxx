@@ -22,9 +22,17 @@ int main(int argc, char* argv[])
   const double inputValue = std::stod(argv[1]);
 
 #ifdef USE_MYMATH
-  const double outputValue = mysqrt(inputValue);
-#else
+
   const double outputValue = sqrt(inputValue);
+
+  std::cout << "MathLib" << std::endl;
+
+#else
+
+  const double outputValue = sqrt(inputValue);
+
+  std::cout << "STD" << std::endl;
+
 #endif
 
   std::cout << "The square root of " << inputValue << " is " << outputValue

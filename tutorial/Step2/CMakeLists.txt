@@ -11,12 +11,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # to the source code
 configure_file(TutorialConfig.h.in TutorialConfig.h)
 
-add_subdirectory(MathFunctions)
+option(USE_MYMATH "Whether we use std or MathFunctions" ON)
+
+if(USE_MYMATH)
+	message("Using MYMATH")
+	add_subdirectory(MathFunctions)
+	list(APPEND EXTRA_LIBS MathFunctions)
+	list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/MathFunctions")
+endif()
 
 # add the executable
 add_executable(Tutorial tutorial.cxx)
 
-target_link_libraries(Tutorial PUBLIC MathFunctions)
+target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})
 
 # TODO 4: Add MathFunctions to Tutorial's target_include_directories()
 # Hint: ${PROJECT_SOURCE_DIR} is a path to the project source. AKA This folder!
@@ -25,5 +32,5 @@ target_link_libraries(Tutorial PUBLIC MathFunctions)
 # so that we will find TutorialConfig.h
 target_include_directories(Tutorial PUBLIC
                            "${PROJECT_BINARY_DIR}"
-						   "${PROJECT_SOURCE_DIR}/MathFunctions"
+						   ${EXTRA_INCLUDES}
                            )
